@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02-CSS</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="Seletores_Pseudo-classes_Postion-2.css"
+    />
+
+    <style>
+
+      div > p {
+        display: none;
+        background-color: yellow;
+        padding: 20px;
+      }
+
+      div:hover p {
+        display: block;
+    }
+    </style>
+
+  </head>
+  <body>
+    <p class="bordas">
+      Teste <br>
+      estilos <br> 
+      de <br>
+      borda 
+    </p>
+
+
+    <p class="caixa-baixa">
+      INDEPENDENTE DO TAMANHO DO CONTEÚDO, ELE VAI PARA CAIXA <br>
+      BAIXA POR CAUSA DA CLASSE
+    </p>
+
+    <div>
+      Teste parágrafo escondido
+      <p>
+        Apenas se passar o mouse por cima da div, vai ativar
+      </p>
+    </div>
+  </body>
+</html>

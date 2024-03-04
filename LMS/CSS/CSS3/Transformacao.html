@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transformação</title>
+  </head>
+  <style>
+    .container {
+      margin: 50px;
+      width: 100px;
+      height: 100px;
+      margin: 50px;
+      border: solid red;
+      /*transform: translate(0px, 34px) movimento de translação;
+        transform: rotate(90deg) rotacionar a div;
+        transform:scale(2,2) aumentar a escala, multiplicando
+        transform: skewX(45deg) movimenta a div para esquerda, depende do graus de rotação
+          */
+      transform: rotate(60deg);
+      box-shadow: 10px 5px;
+    }
+  </style>
+  <body>
+    <!--Funciona com Strings-->
+    <p style="transform: rotate(45deg)"></p>
+    <div class="container"></div>
+  </body>
+</html>

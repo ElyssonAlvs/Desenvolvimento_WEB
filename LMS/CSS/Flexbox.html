@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox</title>
+  </head>
+  <body>
+    <!-- Flexbox é uma forma de organizar o layout do site, se baseando em eixo x e y-->
+
+    <!--CONTAINER-->
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: aqua;
+        width: 300px;
+        height: 300px;
+      "
+    >
+      <div
+        style="
+          background-color: red;
+          width: 50px;
+          height: 50px;
+          align-self: flex-start;
+        "
+      ></div>
+      <div style="background-color: green; width: 50px; height: 50px"></div>
+      <div
+        style="
+          background-color: blue;
+          width: 50px;
+          height: 50px;
+          align-self: flex-end;
+        "
+      ></div>
+      <div
+        style="
+          background-color: red;
+          width: 50px;
+          height: 50px;
+          align-self: flex-start;
+        "
+      ></div>
+      <div style="background-color: green; width: 50px; height: 50px"></div>
+      <div
+        style="
+          background-color: blue;
+          width: 50px;
+          height: 50px;
+          align-self: flex-end;
+        "
+      ></div>
+      <div
+        style="
+          background-color: red;
+          width: 50px;
+          height: 50px;
+          align-self: flex-start;
+        "
+      ></div>
+      <div style="background-color: green; width: 50px; height: 50px"></div>
+      <div
+        style="
+          background-color: blue;
+          width: 50px;
+          height: 50px;
+          align-self: flex-end;
+        "
+      ></div>
+    </div>
+    <!--
+        @ Flex-direction: 
+            - column em forma de coluna, row em forma de linha, reverse em ambos, muda a direção
+        @ justify-content: Alinha os itens flex no eixo principal (row ou column)
+            - flex-start começa no começo, end, no final
+            - space-around dá um espaçamento entre os elementos
+            - space-between cola os elementos das extremidades deixando um epaçamento igual entre os outros
+            - space-evenly espaçamento igual entre os elementos tanto para esquerda como para direita
+        @ align-items : Alinha os itens flex no eixo transversal
+            - Alinhamento dos elementos na página, podendo ficar no centro, esquerda, etc;
+        @ align-self:
+            - Funciona apenas em flexbox, onde é possível mudar a posição de um elemento a partir do pai (display)
+        @ flex-warp Defini se achata dentro do container, ou continua na próxima linha:
+            - A medida que a quantidade de elementos vai aumentando, ele ajusta a quantidade ao tamanho da página
+            warp = acabou a linha, começa na outra
+            (padrão) nowarp = junta todos os elemento do flex em uma só linha ou coluna
+            warp-reverse = começa de baixo para cima
+        @ align-content:
+            - Apenas com mais de uma linha, parecido com o align padrão
+        -->
+  </body>
+</html>

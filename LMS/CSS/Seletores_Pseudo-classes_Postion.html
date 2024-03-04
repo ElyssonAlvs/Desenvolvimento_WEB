@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-CSS</title>
+
+    <link rel="stylesheet" type="text/css" href="Seletores_Pseudo-classes_Postion.css">
+
+    <style>
+        h2 {
+            color: red;
+        }
+        .minha_classe {
+            color: orangered;
+            font-weight: bolder;
+        }   
+    </style>
+</head>
+<body>
+
+    <div>
+        <p>
+            CSS dentro de uma div
+        </p>
+        <blockquote>
+            <p>
+                <!-- Estilo se aplicar aos filhos da div -->
+                Dentro de um blockquote
+            </p>
+        </blockquote>
+    </div>
+
+    <!-- Usar ID só pode ter um único ID para o elemento expecífico -->
+    <p id="meu-id">
+        Usando ID
+    </p>
+
+    <h1 style="
+    color:blue;
+    margin-left:100px" 
+    >CSS Inline</h1>
+
+    <h2>
+        CSS interno à página
+    </h2>
+
+    <p class="minha_classe">
+        Criar uma classe com um estilo próprio
+    </p>
+
+    <h3>
+        CSS externo, no arquivo
+    </h3>
+
+    <h4 class="classe-externa">
+        Classe Externa
+    </h4>
+</body>
+</html>

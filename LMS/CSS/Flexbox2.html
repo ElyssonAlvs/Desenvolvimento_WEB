@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox2</title>
+  </head>
+  <body>
+    <!-- Flexbox é uma forma de organizar o layout do site, se baseando em eixo x e y-->
+
+    <!--CONTAINER-->
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: aqua;
+        width: 300px;
+        height: 300px;
+      "
+    >
+      <div style="background-color: red; flex: 1">A</div>
+
+      <div style="background-color: green; flex: 1">B</div>
+
+      <div style="background-color: blue; flex: 1">C</div>
+    </div>
+    <!--@ Flex: sem os tamanhos, o flex vai determinar proporções, somando o valor dos flex
+    ele divide igualmente o espaço da página para a quantidade de elementos existentes,
+    no exemplo temos 3, portanto vai ser um terço do tamanho da página para cada elemento-->
+  </body>
+</html>

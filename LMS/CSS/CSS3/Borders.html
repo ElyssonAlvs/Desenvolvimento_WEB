@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bordas</title>
+  </head>
+  <style>
+    .container {
+      width: 100px;
+      height: 100px;
+      margin: 50px;
+      border: solid red;
+    }
+  </style>
+  <body>
+    <!--Famosa borda arredondada-->
+    <div class="container" style="border-radius: 25px"></div>
+    <!--Bordas diferentes, meio a meio-->
+    <div class="container" style="border-radius: 25px 10px 35px 20 px"></div>
+    <!--border-top-left-radius: em cima esquerda redondo
+        border-top-right-radius: em cima direita redondo
+        border-botton-left-radius: embaixo esquerda redondo
+        border-botton-right-radius: embaixo direita redondo
+    -->
+    <div class="container" style="border-top-left-radius: 25px"></div>
+  </body>
+</html>

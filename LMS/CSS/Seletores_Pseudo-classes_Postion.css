@@ -1,0 +1,19 @@
+h3 {
+  color: blueviolet;
+  margin-top: 100px;
+}
+
+.classe-externa {
+  color: yellow;
+}
+
+#meu-id {
+  color: brown;
+  font-size: larger;
+}
+
+/* sinaliza que apenas filhos diretos da div, receberão o estilo */
+div > p {
+  color: aquamarine;
+  font-size: small;
+}
