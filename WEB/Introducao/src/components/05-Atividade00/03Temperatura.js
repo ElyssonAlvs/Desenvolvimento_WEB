@@ -1,3 +1,4 @@
+/** Função que faz **conversão de temperaturas** */ 
 const Temperatura = () => {
 
     const celsiuspfahrenheit = (celsius) => (9 * celsius) / 5 + 32
