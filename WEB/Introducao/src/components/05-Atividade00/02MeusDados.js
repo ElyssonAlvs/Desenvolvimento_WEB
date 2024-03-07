@@ -1,15 +1,14 @@
+const MeusDadosProps = (Props) => {
 
-const Dados = (Props) => {
+    let { nome, curso, universidade } = Props
 
-    const {nome, curso, universidade} = Props
-    
-    return(
+    return (
         <div>
-            <h1>Nome: {nome} </h1>
-            <h1>Curso: {curso}</h1>
-            <h1>Universidade: {universidade}</h1>
+            <h3>Nome: {nome} </h3>
+            <h3>Curso: {curso}</h3>
+            <h3>Universidade: {universidade}</h3>
         </div>
     )
 }
 
-export default Dados
+export default MeusDadosProps
