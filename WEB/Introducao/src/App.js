@@ -8,13 +8,16 @@
 // import Temperatura from "./components/05-Atividade00/03Temperatura"
 // import SistemaSolar from "./components/06-Children/SistemaSolar";
 // import Planeta from "./components/06-Children/Planeta";
-import Galaxia from "./components/06-Children/Galaxia";
+//import Galaxia from "./components/06-Children/Galaxia";
+//import ComPai from "./components/07-ComPaiFilho/ComPai";
+//import Estado from "./components/08-Estados/Estado";
+import Pokemon from "./components/08-Estados/Pokemon";
 
 function App() {
   return (
     <div>
       <h1>Desenvolvimento de Software para a WEB!</h1>
-      <Galaxia nome="Via Láctea" />
+      <Pokemon />
     </div>
   )
 }
