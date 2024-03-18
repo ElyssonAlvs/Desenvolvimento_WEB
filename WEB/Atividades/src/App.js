@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+ import Pai from "./components/Atividade01/Q1/01Pai";
+// import { Memoria, PlacaDeVideo, PlacaMae } from "./components/Atividade01/Q2/02MeuPC";
+// import { Arena, World } from './components/Atividade01/03Batalha';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Pai/>
     </div>
   );
 }
+
 
 export default App;
