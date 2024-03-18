@@ -34,10 +34,10 @@ Os componentes representam uma batalha entre heróis e inimigos. Cria-se os comp
    - Arena irá renderizar os componentes Hero e Enemy.
 
 2. **Utilização de Props.children:**
-   - Em World, faça uma chamada ao props.children.
+   - Em World, faz-se uma chamada ao props.children.
 
 3. **Exibição em App.js:**
-   - Exiba World em `App.js`, envolvendo chamadas ao componente Arena.
+   - Exibi-se World em `App.js`, envolvendo chamadas ao componente Arena.
 
    ```javascript
     import React from 'react';
