@@ -13,13 +13,15 @@
 // import Estado from "./components/08-Estados/Estado";
 // import Pokemon from "./components/08-Estados/Pokemon";
 // import { CompA } from "./components/09-PropDrilling/PropDrilling";
-import PokemonPrincipal from "./components/11-PokemonContexto/PokemonPrincipal";
+// import PokemonPrincipal from "./components/11-PokemonContexto/PokemonPrincipal";
+// import Efeito from "./components/11-Efeitos/Efeito";
+import ComponentePromessa from "./components/12-Promessa/MeuAsync";
 
 function App() {
   return (
     <div>
       <h1>Desenvolvimento de Software para a WEB!</h1>
-      <PokemonPrincipal />
+      <ComponentePromessa></ComponentePromessa>
     </div>
   )
 }
