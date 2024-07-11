@@ -1,15 +1,16 @@
-import Dados from "./02MeusDados"
+import MeusDadosProps from "./02MeusDados"
 
 const Informacao = () => {
 
     return (
         <div>
-            <Dados
+            <MeusDadosProps
                 nome="Danilo Gomes"
                 curso="Sistemas de Informação"
                 universidade="Universidade Federal do Ceará"
             />
-            <Dados
+            <br />
+            <MeusDadosProps
                 nome="Elysson Alves"
                 curso="Sistemas de Informação"
                 universidade="Universidade Federal do Ceará"
