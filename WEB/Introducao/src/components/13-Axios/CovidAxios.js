@@ -13,12 +13,12 @@ const CovidAxios = () => {
             //modificar para fetch
             //depois usar then-cath e também async await
             axios.get("https://covid19-brazil-api.now.sh/api/report/v1")
-            .then(resposta => {
-                setCasos(resposta.data.data[8].cases)
-                setMortes(resposta.data.data[8].deaths)
-                //console.log(casos + " " + mortes)
-            })
-            .catch(error => console.log(error))
+                .then(resposta => {
+                    setCasos(resposta.data.data[8].cases)
+                    setMortes(resposta.data.data[8].deaths)
+                    //console.log(casos + " " + mortes)
+                })
+                .catch(error => console.log(error))
         }
         ,
         []
