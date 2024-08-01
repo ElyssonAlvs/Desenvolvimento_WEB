@@ -1,8 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import idReducer from "../slice/idSlice"
+import { configureStore } from "@reduxjs/toolkit"
+import contadorSlice from "../slice/contadorSlice"
 
-export const store = configureStore({
-    reducer: {
-        id: idReducer
+export const store = configureStore(
+    {
+        reducer: {
+            contador: contadorSlice
+        },
     }
-}) 
+)
