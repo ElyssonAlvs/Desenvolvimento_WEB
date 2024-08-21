@@ -18,7 +18,7 @@ const Questao01A = () => {
     );
 }
 
-// Componente Questao01B utilizando a função clássica (function)
+// Questao01B utilizando a função clássica (function)
 function Questao01B(props) {
 
     // Acessa a lista recebida via props e pelo map para encontrar o maior número em cada objeto
