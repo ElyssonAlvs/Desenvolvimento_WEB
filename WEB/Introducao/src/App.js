@@ -1,10 +1,11 @@
-import Main from "./components/18-CRUD/Main";
+//import Main from "./components/18-CRUD/Main";
+import SaveLoadData from "./components/15-LocalSessionStorage/SaveLoadData";
 
 function App() {
   return (
     <div>
       <h1>Desenvolvimento de Software para a WEB!</h1>
-      <Main/>
+      <SaveLoadData />
     </div>
   )
 }

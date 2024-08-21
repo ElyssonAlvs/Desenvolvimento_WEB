@@ -6,6 +6,7 @@ import { Link, Outlet } from "react-router-dom";
 const Home = () => {
     return (
         <div>
+            {/* INÍCIO DA BARRA DE NAVEGAÇÃO */}
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
@@ -18,9 +19,10 @@ const Home = () => {
                                     Home
                                 </a>
                             </li>
+                            {/* INÍCIO DO DROPDOWN*/}
                             <li className="nav-item dropdown">
                                 <a
-                                    href="#"
+                                    href="http://www.bootstrap.com/"
                                     className="nav-link dropdown-toggle"
                                     role="button"
                                     data-bs-toggle="dropdown"
@@ -48,7 +50,7 @@ const Home = () => {
                             </li>
                             <li className="nav-item dropdown">
                                 <a
-                                    href="#"
+                                    href="http://www.bootstrap.com/"
                                     className="nav-link dropdown-toggle"
                                     role="button"
                                     data-bs-toggle="dropdown"
@@ -74,11 +76,17 @@ const Home = () => {
                                     </li>
                                 </ul>
                             </li>
+                            {/* FIM DO DROPDOWN */}
                         </ul>
                     </div>
                 </div>
             </nav>
+            {/* FIM DA BARRA DE NAVEGAÇÃO */}
+
+            {/* INÍCIO DO CONTEÚDO DO SITE */}
             <Outlet />
+            {/* FIM DO CONTEÚDO DO SITE */}
+
         </div>
     );
 };

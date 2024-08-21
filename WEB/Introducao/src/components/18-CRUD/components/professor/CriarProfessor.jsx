@@ -1,5 +1,6 @@
-import "../css/crud.css";
+import "../../css/crud.css";
 import { useState } from 'react'
+import ProfessorService from "../../services/ProfessorService";
 
 
 const CriarProfessor = () => {
@@ -7,7 +8,7 @@ const CriarProfessor = () => {
     const [curso, setCurso] = useState('')
     const [titulacao, setTitulacao] = useState('GRADUAÇÃO')
     const [ai, setAi] = useState({ es: false, lc: false, mc: false }) // ai = área de interesse
-    const [universidade, setUniversidade] = useState({ ufc: true, ifce: false })
+    const [universidade, setUniversidade] = useState({ ufc: true, ifce: false, uece: false })
 
     const handleRadio = (event) => {
         const reset = { ufc: false, ifce: false }
@@ -40,7 +41,12 @@ const CriarProfessor = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        alert("Nome: " + nome + "\n Curso: " + curso)
+        //alert("Nome: " + nome + "\n Curso: " + curso)
+        // Objeto JSON
+        const novoProfessor = { nome, curso, titulacao, ai, universidade }
+        ProfessorService.postProfessoresAxiosThenCatch(novoProfessor, (data) => {
+            console.log(data)
+        })
     }
 
     return (
@@ -174,6 +180,23 @@ const CriarProfessor = () => {
                                 className="form-check-label"
                             >
                                 Instituto Federal do Ceará
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                id="idUECE"
+                                name="universidade"
+                                value="uece"
+                                checked={universidade.uece}
+                                onChange={handleRadio}
+                            />
+                            <label
+                                htmlFor="idUECE"
+                                className="form-check-label"
+                            >
+                                Universidade Estadual do Ceará
                             </label>
                         </div>
                     </fieldset>

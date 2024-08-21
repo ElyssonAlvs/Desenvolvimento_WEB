@@ -1,9 +1,9 @@
-import alunos from "../data/db_aluno";
-import "../css/crud.css";
+import alunos from "../../data/db_aluno";
+import "../../css/crud.css";
 
 const ListarAluno = () => {
-    const corpoTabela = () => {
-        const novoArray = alunos.map(
+    const renderizarAlunos = () => {
+        const vetorResultado = alunos.map(
             (aluno) => {
                 return (
                     //cada elemento do array de alunos
@@ -22,13 +22,13 @@ const ListarAluno = () => {
                 ); //return de cada elemento como um JSX
             } //funcao arrow
         ) // map
-        return novoArray
+        return vetorResultado
     }
 
     return (
         <div className="page-content">
             <h1>Listar Alunos</h1>
-            <table className="table table-striped table-content">
+            <table className="table table-striped table-content table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -37,7 +37,7 @@ const ListarAluno = () => {
                         <th scope="col">IRA</th>
                     </tr>
                 </thead>
-                <tbody>{corpoTabela()}</tbody>
+                <tbody>{renderizarAlunos()}</tbody>
             </table>
         </div>
     )

@@ -1,4 +1,4 @@
-import "../css/crud.css";
+import "../../css/crud.css";
 import React, { useState } from 'react'
 
 const CriarAluno = () => {
