@@ -17,7 +17,7 @@ const MeuContexto = createContext();
 
 // Componente de nível superior que vai provê o valor do contexto
 const App = () => {
-  const valor = "Este é o dado!";
+  const valor = "Teste do Contexto";
   
   return (
     <MeuContexto.Provider value={valor}>
@@ -45,7 +45,7 @@ const ComponenteD = () => {
 };
 
 
-No exemplo, o contexto MeuContexto armazena o valor "Este é o dado!". O componente App
+No exemplo, o contexto MeuContexto armazena o valor "Teste do Contexto". O componente App
 é o provedor (Provider) desse contexto e envolve todos os outros componentes. Em qualquer
 componente da árvore, pode-se usar o hook useContext para acessar o valor diretamente, sem 
 precisar passar props entre os componentes intermediários. Isso elimina o Props Drilling, já 
