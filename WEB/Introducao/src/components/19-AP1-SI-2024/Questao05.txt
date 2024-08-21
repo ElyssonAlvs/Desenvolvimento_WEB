@@ -1,0 +1,52 @@
+Props Drilling acontece se precisa passar dados de um componente pai para componentes profundamente aninhados, 
+passando vários níveis de componentes intermediários. Esse processo pode se tornar confuso e difícil de manter, 
+principalemente em grandes aplicações, pois os componentes intermediários precisam passar props adiante mesmo que não 
+façam uso direto desses dados, aumentando a complexidade.
+
+Com o uso de Contextos, os dados podem ser acessados diretamente pelos componentes que precisam deles,
+independentemente da sua posição na árvore de componentes. Assim, se evita o problema de ter que 
+passar props manualmente através de todos os componentes intermediários, deixando o código com mais
+qualidade.
+
+Exemplo prático:
+
+import React, { createContext, useContext } from 'react';
+
+// Criação do contexto
+const MeuContexto = createContext();
+
+// Componente de nível superior que vai provê o valor do contexto
+const App = () => {
+  const valor = "Este é o dado!";
+  
+  return (
+    <MeuContexto.Provider value={valor}>
+      <ComponenteA />
+    </MeuContexto.Provider>
+  );
+};
+
+const ComponenteA = () => {
+  return <ComponenteB />;
+};
+
+const ComponenteB = () => {
+  return <ComponenteC />;
+};
+
+const ComponenteC = () => {
+  return <ComponenteD />;
+};
+
+// Componente consumidor do valor do contexto
+const ComponenteD = () => {
+  const valor = useContext(MeuContexto); // Obter o valor do contexto
+  return <p>{valor}</p>;
+};
+
+
+No exemplo, o contexto MeuContexto armazena o valor "Este é o dado!". O componente App
+é o provedor (Provider) desse contexto e envolve todos os outros componentes. Em qualquer
+componente da árvore, pode-se usar o hook useContext para acessar o valor diretamente, sem 
+precisar passar props entre os componentes intermediários. Isso elimina o Props Drilling, já 
+que não é mais necessário passar o dado manualmente de um componente para o outro.

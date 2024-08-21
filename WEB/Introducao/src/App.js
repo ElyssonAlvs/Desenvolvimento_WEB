@@ -1,11 +1,21 @@
 //import Main from "./components/18-CRUD/Main";
-import SaveLoadData from "./components/15-LocalSessionStorage/SaveLoadData";
+import Questao01A from "./components/19-AP1-SI-2024/Questao01";
+import Questao02 from "./components/19-AP1-SI-2024/Questao02";
+import Questao03 from "./components/19-AP1-SI-2024/Questao03";
+import Questao04 from "./components/19-AP1-SI-2024/Questao04";
+
 
 function App() {
   return (
     <div>
       <h1>Desenvolvimento de Software para a WEB!</h1>
-      <SaveLoadData />
+      <Questao01A />
+      <hr />
+      <Questao02 />
+      <hr />
+      <Questao03/>
+      <hr />
+      <Questao04/>
     </div>
   )
 }
