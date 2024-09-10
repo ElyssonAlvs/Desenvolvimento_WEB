@@ -1,6 +1,6 @@
 class ProfessorModel {
-    
-    constructor(id,nome,curso,titulacao,universidade) {
+
+    constructor(id, nome, curso, titulacao, universidade) {
         this.id = id
         this.nome = nome
         this.curso = curso
