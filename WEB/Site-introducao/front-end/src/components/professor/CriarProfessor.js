@@ -1,17 +1,18 @@
-import "../../css/crud.css";
-import { useState } from 'react'
-import ProfessorService from "../../services/ProfessorService";
+import "../../css/crud.css"
+import { useState } from "react"
 
+import axios from "axios"
 
 const CriarProfessor = () => {
-    const [nome, setNome] = useState('')
-    const [curso, setCurso] = useState('')
-    const [titulacao, setTitulacao] = useState('GRADUAÇÃO')
-    const [ai, setAi] = useState({ es: false, lc: false, mc: false }) // ai = área de interesse
-    const [universidade, setUniversidade] = useState({ ufc: true, ifce: false, uece: false })
+
+    const [nome, setNome] = useState("")
+    const [curso, setCurso] = useState("")
+    const [titulacao, setTitulacao] = useState("GRAD")
+    const [ai, setAi] = useState({ es: false, lc: false, mc: false, al: false })
+    const [universidade, setUniversidade] = useState({ ifce: false, ufc: false })
 
     const handleRadio = (event) => {
-        const reset = { ufc: false, ifce: false }
+        const reset = { ifce: false, ufc: false }
         setUniversidade({
             ...reset,
             [event.target.value]: event.target.checked
@@ -27,183 +28,158 @@ const CriarProfessor = () => {
         )
     }
 
-    const handleInputNome = (event) => {
-        setNome(event.target.value)
-    }
-
-    const handleInputCurso = (event) => {
-        setCurso(event.target.value)
-    }
-
-    const handleInputTitulacao = (event) => {
-        setTitulacao(event.target.value)
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault()
-        //alert("Nome: " + nome + "\n Curso: " + curso)
-        // Objeto JSON
         const novoProfessor = { nome, curso, titulacao, ai, universidade }
-        ProfessorService.postProfessoresAxiosThenCatch(novoProfessor, (data) => {
-            console.log(data)
-        })
+        postProfessorAxiosThenCatch(novoProfessor)
+    }
+
+    const postProfessorAxiosThenCatch = (novoProfessor) => {
+        axios.post("http://localhost:3003/professores/criar", novoProfessor)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch(error => console.log(error))
     }
 
     return (
-        <div>
+        <div className="page-content">
             <h1>Criar Professor</h1>
-            <form className='page-content' onSubmit={handleSubmit}>
-                <div className='mb-3'>
-                    <label
-                        className='form-label'
-                        htmlFor='InputNome'>
-                        Nome:
+            <form onSubmit={handleSubmit}>
+
+                <div>
+                    <label htmlFor="idNome" className="form-label">
+                        Nome
                     </label>
+
                     <input
-                        className='form-control'
+                        id="idNome"
                         type="text"
                         name="nome"
                         value={nome}
-                        onChange={handleInputNome}
+                        onChange={(event) => setNome(event.target.value)}
+                        className="form-control"
                     />
                 </div>
-                <div className='mb-3'>
-                    <label className='form-label' htmlFor='InputCurso'>Curso:</label>
+
+                <div>
+                    <label htmlFor="idCurso" className="form-label">
+                        Curso
+                    </label>
+
                     <input
-                        className='form-control'
+                        id="idCurso"
                         type="text"
-                        name="Curso"
+                        name="curso"
                         value={curso}
-                        onChange={handleInputCurso}
+                        onChange={(event) => setCurso(event.target.value)}
+                        className="form-control"
                     />
                 </div>
-                <div className='mb-3'>
-                    <label className='form-label' >Titulação:</label>
+
+                <div>
+                    <label htmlFor="idTitulacao" className="form-label">
+                        Titulação
+                    </label>
+
                     <select
-                        className='form-select'
+                        id="idTitulacao"
                         value={titulacao}
-                        id="selectTitulacao"
-                        onChange={handleInputTitulacao}
+                        onChange={(event) => setTitulacao(event.target.value)}
+                        className="form-select"
                     >
-                        <option value="GRADUAÇÃO">GRADUAÇÃO</option>
-                        <option value="DOUTOR">DOUTOR</option>
-                        <option value="MESTRE">MESTRE</option>
+                        <option value="GRAD">GRADUAÇÃO</option>
+                        <option value="MEST">MESTRADO</option>
+                        <option value="DOUT" >DOUTORADO</option>
                     </select>
                 </div>
 
-                {/* Áreas de interesse */}
-
-                <div>
-                    <div className="form-label">Áreas de Interesse</div>
-                    <fieldset className=" scheduler-border">
+                <div style={{ marginTop: "10px" }}>
+                    <label className="form-label">Áreas de Interesse</label>
+                    <fieldset className="scheduler-border">
                         <div className="form-check">
                             <input
                                 id="idES"
                                 type="checkbox"
-                                className="form-check-input"
                                 checked={ai.es}
-                                onChange={handleCheckbox}
                                 name="es"
+                                onChange={handleCheckbox}
+                                className="form-check-input"
                             />
-                            <label
-                                htmlFor="idES"
-                                className="form-check-label"
-                            >
-                                Engenharia de Software
-                            </label>
+                            <label htmlFor="idES" className="form-check-label">Engenharia de Software</label>
                         </div>
                         <div className="form-check">
                             <input
                                 id="idLC"
                                 type="checkbox"
-                                className="form-check-input"
                                 checked={ai.lc}
-                                onChange={handleCheckbox}
                                 name="lc"
+                                onChange={handleCheckbox}
+                                className="form-check-input"
                             />
-                            <label
-                                htmlFor="idLC"
-                                className="form-check-label">
-                                Lógica Computacional
-                            </label>
+                            <label htmlFor="idLC" className="form-check-label">Lógica Computacional</label>
                         </div>
                         <div className="form-check">
                             <input
                                 id="idMC"
                                 type="checkbox"
-                                className="form-check-input"
                                 checked={ai.mc}
-                                onChange={handleCheckbox}
                                 name="mc"
+                                onChange={handleCheckbox}
+                                className="form-check-input"
                             />
-                            <label
-                                htmlFor="idMC"
-                                className="form-check-label">
-                                Matemática Computacional
-                            </label>
+                            <label htmlFor="idMC" className="form-check-label">Matemática Computacional</label>
                         </div>
-                    </fieldset>
-
-                    {/* Universidade de Origem */}
-
-                    <div className="form-label">Universidade de Origem</div>
-                    <fieldset className=" scheduler-border">
                         <div className="form-check">
                             <input
+                                id="idAL"
+                                type="checkbox"
+                                checked={ai.al}
+                                name="al"
+                                onChange={handleCheckbox}
                                 className="form-check-input"
-                                type="radio"
+                            />
+                            <label htmlFor="idAL" className="form-check-label">Algoritimos</label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div style={{ marginTop: "10px" }}>
+                    <label className="form-label">Universidade</label>
+                    <fieldset className="scheduler-border">
+                        <div className="form-check">
+                            <input
                                 id="idUFC"
+                                type="radio"
                                 name="universidade"
                                 value="ufc"
                                 checked={universidade.ufc}
                                 onChange={handleRadio}
+                                className="form-check-input"
                             />
-                            <label
-                                htmlFor="idUFC"
-                                className="form-check-label"
-                            >
-                                Universidade Federal do Ceará
-                            </label>
+                            <label htmlFor="idUFC" className="form-check-label">UFC</label>
                         </div>
                         <div className="form-check">
                             <input
-                                className="form-check-input"
-                                type="radio"
                                 id="idIFCE"
+                                type="radio"
                                 name="universidade"
                                 value="ifce"
                                 checked={universidade.ifce}
                                 onChange={handleRadio}
-                            />
-                            <label
-                                htmlFor="idIFCE"
-                                className="form-check-label"
-                            >
-                                Instituto Federal do Ceará
-                            </label>
-                        </div>
-                        <div>
-                            <input
                                 className="form-check-input"
-                                type="radio"
-                                id="idUECE"
-                                name="universidade"
-                                value="uece"
-                                checked={universidade.uece}
-                                onChange={handleRadio}
                             />
-                            <label
-                                htmlFor="idUECE"
-                                className="form-check-label"
-                            >
-                                Universidade Estadual do Ceará
-                            </label>
+                            <label htmlFor="idIFCE" className="form-check-label">IFCE</label>
                         </div>
                     </fieldset>
                 </div>
+
                 <div className="div-button-submit">
-                    <button class="btn btn-primary" type="submit">Submeter</button>
+                    <button type="submit" className="btn btn-primary">
+                        SUBMETER
+                    </button>
                 </div>
+
             </form>
         </div>
     )

@@ -1,17 +1,27 @@
 import axios from "axios";
 
-//const url = "http://localhost:3001/professores";
-const url = "http://localhost:3003/professores/"
-//const url = "http://10.0.116.0:3003/professores/"
+const url = "http://localhost:3003/professores/";
 
 class ProfessorService {
-  //GET SERVICES
-  static getProfessoresAxiosThenCatch = (callback) => {
-    axios
-      .get(url+"listar")
+  // GET
+  static getProfessoresFetchAsyncAwait = async (callback) => {
+    try {
+      const response = await fetch(url+"listar");
+      const json = await response.json();
+      callback(json);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  static getProfessoresFetchThenCatch = (callback) => {
+    fetch(url+"listar")
       .then((response) => {
-        //console.log(response.data)
-        callback(response.data);
+        return response.json();
+      })
+      .then((json) => {
+        //console.log(json)
+        callback(json);
       })
       .catch((error) => console.log(error));
   };
@@ -25,84 +35,49 @@ class ProfessorService {
     }
   };
 
-  static getProfessoresFetchThenCatch = (callback) => {
-    fetch(url+"listar")
-      .then((response) => response.json())
-      .then((json) => callback(json))
-      .catch((error) => console.log(error));
-  };
-
-  static getProfessoresFetchAsyncAwait = async (callback) => {
-    try {
-      const response = await fetch(url+"listar");
-      const json = await response.json();
-      callback(json);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  static getProfessorById = (id, callback) => {
-    //.get(`http://localhost:3001/professores/?id=${id}`)
-    axios  
-      .get(`http://localhost:3003/professores/recuperar/${id}`)
+  static getProfessoresAxiosThenCatch = (callback) => {
+    axios
+      .get(url+"listar")
       .then((response) => {
-        //console.log(response)
+        //console.log(response.data)
         callback(response.data);
       })
       .catch((error) => console.log(error));
   };
 
-  //POST SERVICES
-  static postProfessorAxiosThenCatch = (professor, callback) => {
+  static getProfessorById = (id, callback) => {
     axios
-      .post(url+"criar", professor)
+      .get(`http://localhost:3003/professores/${id}`)
       .then((response) => {
+        //console.log(response.data)
+        //const { nome, curso, titulacao, ai, universidade } = response.data;
+        callback(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // PUT
+  static atualizarProfessorById = (id, professorEditado, callback) => {
+    axios
+      .put(`http://localhost:3003/professores/${id}`, professorEditado)
+      .then((response) => {
+        //console.log(response)
+        //navigate("/professores/listar");
         callback(response);
       })
       .catch((error) => console.log(error));
   };
 
-  static postProfessorFetchThenCatch = (professor, callback) => {
-    fetch(url+"criar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(professor),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => callback(json))
-      .catch((error) => console.log(error));
-  };
-
-  // PUT SERVICES
-
-  static updateProfessor = (id, professorEditado, callback) => {
-    //.put(`http://localhost:3001/professores/${id}`, professorEditado)
+  // DELETE
+  static deleteProfessorById = (id, callback) => {
     axios
-      .put(`http://localhost:3003/professores/atualizar/${id}`, professorEditado)
+      .delete(`http://localhost:3003/professores/apagar/${id}`)
       .then((response) => {
-        //console.log(response)
+        //console.log(response);
         callback(response)
       })
       .catch((error) => console.log(error));
   };
-
-  // DELETE SERVICES
-
-  static deleteProfessor = (id, callback) => {
-    //.delete(`http://localhost:3001/professores/${id}`)
-    axios
-      .delete(`http://localhost:3003/professores/apagar/${id}`)
-      .then(response => {
-        alert("Professor apagado!")
-        //navigate("/professor/listar")
-        console.log(response)
-        callback("ok!")
-      })
-      .catch( error => console.log(error))
-  }
 }
 
 export default ProfessorService;

@@ -1,94 +1,85 @@
-import "../../css/crud.css"
+import { Link } from "react-router-dom";
+
+import "../../css/crud.css";
 import ProfessorService from "../../services/ProfessorService";
 
-import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-import axios from "axios";
 
-const Listar = () => {
+const ListarProfessor = () => {
+  const [professores, setProfessores] = useState([]);
 
-  const [professores, setProfessores] = useState([])
-  const navigate = useNavigate()
+  useEffect(() => {
+    ProfessorService.getProfessoresAxiosAsyncAwait((json) => {
+      setProfessores(json);
+    });
+  }, []);
 
-  useEffect(
-    () => {
-      ProfessorService
-      .getProfessoresFetchAsyncAwait(data => setProfessores(data))
-    }
-    ,
-    []
-  )
-
-  const handleDelete = (id) => {
-    if (window.confirm(`Deseja excluir id = ${id}`)) {
-      ProfessorService.deleteProfessor(
+  const deleteProfessor = (id) => {
+    if(window.confirm(`Deseja realmente excluir id = ${id}`)){
+      ProfessorService.deleteProfessorById(
         id,
-      (response) =>{
-        alert(response)
-        const result = professores.filter((professor) => professor.id!==id)
-        //console.log(result)
-        setProfessores(result)
-        //navigate(0)
-      })
-
+        (response) => {
+          //console.log(response)
+          const res = professores.filter(
+            (professor) => professor._id !== id
+          )
+          //console.log(res)
+          setProfessores(res)
+        }
+      )
     }
   }
 
-  const renderizarProfessores = () => {
-    const vetorResultado = professores.map(
-        (professor) => {
-            return (
-                <tr>
-                    <th scope="row">{professor.id}</th>
-                    <td>{professor.nome}</td>
-                    <td>{professor.curso}</td>
-                    <td>{professor.titulacao}</td>
-                    <td>
-                        <div className="button-content">
-                            <Link 
-                              to={`/professor/editar/${professor.id}`}
-                              className="btn btn-primary"
-                            >
-                              Editar
-                            </Link>
-                            <button 
-                              type="button" 
-                              className="btn btn-danger"
-                              onClick={() => handleDelete(professor.id)}
-                            >
-                              Apagar
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            )
-        }
-    )
-    return vetorResultado;
+  const corpoTabela = () => {
+    const novoArray = professores.map(
+      (professor) => {
+        return (
+          <tr>
+            <th scope="row">{professor._id}</th>
+            <td>{professor.nome}</td>
+            <td>{professor.curso}</td>
+            <td>{professor.titulacao}</td>
+            <td className="button-content">
+
+              <Link
+                className="btn btn-primary"
+                to={`/professores/editar/${professor._id}`}
+              >
+                Editar
+              </Link>
+
+              <button 
+                className="btn btn-danger"
+                onClick={() => deleteProfessor(professor._id)}
+              >
+                Apagar
+              </button>
+            </td>
+          </tr>
+        ); //return de cada elemento como um JSX
+      } //funcao arrow
+    ); //map
+    return novoArray;
   };
 
   return (
     <div className="page-content">
-      <h1>Listar Professor</h1>
-      <div className="table-content">
-        <table className="table table-striped table-bordered">
-          <thead className="table-dark">
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nome</th>
-              <th scope="col">Curso</th>
-              <th scope="col">Titulação</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {renderizarProfessores()}
-          </tbody>
-        </table>
-      </div>
+      <h1>Listar Professores</h1>
+      <table className="table table-striped table-content table-bordered">
+        <thead className="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Curso</th>
+            <th scope="col">Titulação</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>{corpoTabela()}</tbody>
+      </table>
     </div>
   );
 };
 
-export default Listar;
+export default ListarProfessor;

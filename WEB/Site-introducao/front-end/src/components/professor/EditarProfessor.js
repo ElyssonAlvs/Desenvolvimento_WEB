@@ -4,7 +4,6 @@ import "../../css/crud.css"
 import { useEffect, useState } from "react"
 import { useParams, useNavigate} from "react-router-dom"
 
-import axios from "axios"
 
 const Editar = () => {
 
