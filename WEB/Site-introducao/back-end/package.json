@@ -10,7 +10,8 @@
     "back-end": "file:",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "express": "^4.17.1",
+    "express": "^4.20.0",
+    "mongoose": "^8.6.1",
     "morgan": "~1.9.1"
   }
 }

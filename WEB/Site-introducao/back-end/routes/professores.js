@@ -1,52 +1,55 @@
 var express = require('express');
 var router = express.Router();
 
-const ProfessorService = require("../services/ProfessorService");
-const { request } = require('express');
-const { response } = require('express');
+// const ProfessorService = require("../services/ProfessorService");
+const ProfessorServiceMongo = require("../services/ProfessorServiceMongo")
 
-router.get(
+/*router.get(
     "/listar",
     (request, response, next) => {
         response.json(ProfessorService.listar())
     }
-)
+)*/
 
+// MONGO
 router.get(
-    "/recuperar/:id",
+    "/listar",
     (request, response, next) => {
-        const id = request.params.id
-        const professor = ProfessorService.recuperar(id)
-        response.json(professor)
+        ProfessorServiceMongo.listar(request, response)
     }
 )
 
-router.post(
+/*router.post(
     "/criar",
     (request, response, next) => {
         const novoProfessor = ProfessorService.criar(request.body)
         response.json(novoProfessor)
     }
-)
+)*/
 
-router.put(
-    "/atualizar/:id",
+//MONGO
+router.post(
+    "/criar",
     (request, response, next) => {
-        const professorAtualizado =
-            ProfessorService.atualizar(
-                request.params.id,
-                request.body
-            )
-        response.json(professorAtualizado)
+        ProfessorServiceMongo.criar(request, response)
     }
 )
 
+/*router.delete(
+    "/apagar/:id",
+    (request,response,next) => {
+        const res = ProfessorService.apagar(request.params.id)
+        response.json({"res":res})
+    }
+)*/
+
+//MONGO
 router.delete(
     "/apagar/:id",
     (request, response, next) => {
-        const res = ProfessorService.apagar(request.params.id)
-        response.json({ "res": res })
+        ProfessorServiceMongo.apagar(request, response)
     }
 )
 
-module.exports = router;
+
+module.exports = router
