@@ -1,7 +1,10 @@
 import "../../css/crud.css"
 import { useState } from "react"
+import ProfessorService from "../../services/ProfessorService"; // Mongo e LocalStorage
+import { useNavigate } from "react-router-dom";
+//import ProfessorFirebaseService from "../../services/ProfessorFirebaseService";
+//import FirebaseContext from "../../utils/FirebaseContext";
 
-import axios from "axios"
 
 const CriarProfessor = () => {
 
@@ -10,6 +13,10 @@ const CriarProfessor = () => {
     const [titulacao, setTitulacao] = useState("GRAD")
     const [ai, setAi] = useState({ es: false, lc: false, mc: false, al: false })
     const [universidade, setUniversidade] = useState({ ifce: false, ufc: false })
+
+    //const firebase = useContext(FirebaseContext) // Firebase
+
+    const navigate = useNavigate()
 
     const handleRadio = (event) => {
         const reset = { ifce: false, ufc: false }
@@ -30,17 +37,26 @@ const CriarProfessor = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const novoProfessor = { nome, curso, titulacao, ai, universidade }
-        postProfessorAxiosThenCatch(novoProfessor)
+        // AxiosThenCatch para o MongoDB (Mongoose) e LocalStorage
+        if (nome && curso && titulacao && ai && universidade) {
+            const novoProfessor = { nome, curso, titulacao, ai, universidade }
+            ProfessorService.postProfessorAxiosThenCatch(
+                novoProfessor,
+                (data) => {
+                    console.log(data)
+                }
+            )
+            navigate("/professor/listar")
+            // Persistindo no Firebase
+            // ProfessorFirebaseService.criarProfessor(
+            //     firebase.getFirestoreDb(),    
+            //     (professorSimples) => console.log(professorSimples),
+            //     novoProfessor
+            // )
+        }
+        alert("Todos os campos devem ser preenchidos!");
     }
 
-    const postProfessorAxiosThenCatch = (novoProfessor) => {
-        axios.post("http://localhost:3003/professores/criar", novoProfessor)
-            .then((response) => {
-                console.log(response)
-            })
-            .catch(error => console.log(error))
-    }
 
     return (
         <div className="page-content">

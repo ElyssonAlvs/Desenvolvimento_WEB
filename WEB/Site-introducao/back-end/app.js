@@ -3,12 +3,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-require("./db/mongo")
+//require("./db/mongo")
 
 // importando os arquivos de rotas
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var professoresRouter = require('./routes/professores');
+var alunosRouter = require('./routes/alunos');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/professores', professoresRouter);
+app.use('/alunos', alunosRouter);
 
 // BROWSER <=> app.js -> professor.jsx -> ProfessorService.jsx -> ProfessorModel.jsx e data.js
 

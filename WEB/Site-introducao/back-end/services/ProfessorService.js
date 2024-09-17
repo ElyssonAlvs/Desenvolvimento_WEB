@@ -16,6 +16,7 @@ class ProfessorService {
             data.nome,
             data.curso,
             data.titulacao,
+            data.ai,
             data.universidade
         )
         professores.push(novoProfessor)
@@ -35,8 +36,8 @@ class ProfessorService {
                 professores[i].nome = professor.nome
                 professores[i].curso = professor.curso
                 professores[i].titulacao = professor.titulacao
-                professores[i].universidade = professor.universidade
                 professores[i].ai = professor.ai
+                professores[i].universidade = professor.universidade
                 return professores[i]
             }
         }

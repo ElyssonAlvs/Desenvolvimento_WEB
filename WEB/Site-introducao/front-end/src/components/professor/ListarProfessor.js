@@ -1,33 +1,65 @@
 import { Link } from "react-router-dom";
 
 import "../../css/crud.css";
-import ProfessorService from "../../services/ProfessorService";
-
+import ProfessorService from "../../services/ProfessorService"; // MongoDB e LocalStorage
 import { useState, useEffect } from "react";
+// import ProfessorFirebaseService from "../../services/ProfessorFirebaseService";
+// import FirebaseContext from "../../utils/FirebaseContext";
+
+
+
+// Quando utilizar o Mongo o id terá que ter 
+// um "_id" e não "id" como está no código para o Firebase.
 
 
 const ListarProfessor = () => {
   const [professores, setProfessores] = useState([]);
+  //const firebase = useContext(FirebaseContext) // firebase
 
   useEffect(() => {
+    // MongoDB e LocalStorage
     ProfessorService.getProfessoresAxiosAsyncAwait((json) => {
       setProfessores(json);
     });
-  }, []);
+
+    // Firebase
+    // ProfessorFirebaseService.listarProfessor(
+    //   firebase.getFirestoreDb(),
+    //   (professores) => {
+    //     // console.log(professores)
+    //     setProfessores(professores)
+    //   }
+    // )
+
+  },
+    // firebase 
+    []
+  );
 
   const deleteProfessor = (id) => {
-    if(window.confirm(`Deseja realmente excluir id = ${id}`)){
+    if (window.confirm(`Deseja realmente excluir id = ${id} ?`)) {
+
+      // Firebase
+      // ProfessorFirebaseService.apagarProfessor(
+      //   firebase.getFirestoreDb(),
+      //   () => {
+      //     const result = professores.filter(
+      //       (professor) => professor.id !== id
+      //     )
+      //     setProfessores(result)
+      //   },
+      //   id
+      // )
+
+      // MongoDB        
       ProfessorService.deleteProfessorById(
         id,
         (response) => {
-          //console.log(response)
-          const res = professores.filter(
-            (professor) => professor._id !== id
+          const result = professores.filter(
+            (professor) => professor.id !== id
           )
-          //console.log(res)
-          setProfessores(res)
-        }
-      )
+          setProfessores(result)
+        });
     }
   }
 
@@ -36,7 +68,7 @@ const ListarProfessor = () => {
       (professor) => {
         return (
           <tr>
-            <th scope="row">{professor._id}</th>
+            <th scope="row">{professor.id}</th>
             <td>{professor.nome}</td>
             <td>{professor.curso}</td>
             <td>{professor.titulacao}</td>
@@ -44,14 +76,14 @@ const ListarProfessor = () => {
 
               <Link
                 className="btn btn-primary"
-                to={`/professores/editar/${professor._id}`}
+                to={`/professores/editar/${professor.id}`}
               >
                 Editar
               </Link>
 
-              <button 
+              <button
                 className="btn btn-danger"
-                onClick={() => deleteProfessor(professor._id)}
+                onClick={() => deleteProfessor(professor.id)}
               >
                 Apagar
               </button>

@@ -8,6 +8,9 @@ import CriarProfessor from "./components/professor/CriarProfessor";
 import ListarProfessor from "./components/professor/ListarProfessor";
 import EditarProfessor from "./components/professor/EditarProfessor";
 
+// import Firebase from "./utils/Firebase";
+// import FirebaseContext from "./utils/FirebaseContext";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -22,7 +25,6 @@ const router = createBrowserRouter([
                 element: <ListarAluno />
             },
             {
-                // Novo
                 path: "alunos/editar/:id",
                 element: <EditarAluno />
             },
@@ -35,7 +37,6 @@ const router = createBrowserRouter([
                 element: <ListarProfessor />
             },
             {
-                // Novo
                 path: "professores/editar/:id",
                 element: <EditarProfessor />
             },
@@ -43,9 +44,19 @@ const router = createBrowserRouter([
     }
 ]);
 
-const Main = () => {
+// Para o FIREBASE
+// const Main = () => {
+//     return (
+//         <FirebaseContext.Provider value={new Firebase()}>
+//             <RouterProvider router={router}/>
+//         </FirebaseContext.Provider> 
+//     )
+// }
+
+// Para o MONGODB e LOCAL STORAGE
+ const Main = () => {
     return (
         <RouterProvider router={router} />
     )
-}
+} 
 export default Main

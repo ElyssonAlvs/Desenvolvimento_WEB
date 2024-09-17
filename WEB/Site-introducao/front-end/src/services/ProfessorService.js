@@ -3,10 +3,20 @@ import axios from "axios";
 const url = "http://localhost:3003/professores/";
 
 class ProfessorService {
+
+  // AxiosThenCatch para o MongoDB (Mongoose) e LocalStorage
+  static postProfessorAxiosThenCatch = (novoProfessor) => {
+    axios.post(url + "criar", novoProfessor)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(error => console.log(error))
+  }
+
   // GET
   static getProfessoresFetchAsyncAwait = async (callback) => {
     try {
-      const response = await fetch(url+"listar");
+      const response = await fetch(url + "listar");
       const json = await response.json();
       callback(json);
     } catch (error) {
@@ -15,12 +25,11 @@ class ProfessorService {
   };
 
   static getProfessoresFetchThenCatch = (callback) => {
-    fetch(url+"listar")
+    fetch(url + "listar")
       .then((response) => {
         return response.json();
       })
       .then((json) => {
-        //console.log(json)
         callback(json);
       })
       .catch((error) => console.log(error));
@@ -28,7 +37,7 @@ class ProfessorService {
 
   static getProfessoresAxiosAsyncAwait = async (callback) => {
     try {
-      const response = await axios.get(url+"listar");
+      const response = await axios.get(url + "listar");
       callback(response.data);
     } catch (error) {
       console.log(error);
@@ -37,32 +46,27 @@ class ProfessorService {
 
   static getProfessoresAxiosThenCatch = (callback) => {
     axios
-      .get(url+"listar")
+      .get(url + "listar")
       .then((response) => {
-        //console.log(response.data)
         callback(response.data);
       })
       .catch((error) => console.log(error));
   };
 
-  static getProfessorById = (id, callback) => {
-    axios
-      .get(`http://localhost:3003/professores/${id}`)
-      .then((response) => {
-        //console.log(response.data)
-        //const { nome, curso, titulacao, ai, universidade } = response.data;
-        callback(response.data);
-      })
-      .catch((error) => console.log(error));
+  static getProfessorById = async (id, callback) => {
+    try {
+      const response = await axios.get(url + "recuperar/" + id);
+      callback(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // PUT
   static atualizarProfessorById = (id, professorEditado, callback) => {
     axios
-      .put(`http://localhost:3003/professores/${id}`, professorEditado)
+      .put(url + "atualizar/" + id, professorEditado)
       .then((response) => {
-        //console.log(response)
-        //navigate("/professores/listar");
         callback(response);
       })
       .catch((error) => console.log(error));
@@ -71,9 +75,8 @@ class ProfessorService {
   // DELETE
   static deleteProfessorById = (id, callback) => {
     axios
-      .delete(`http://localhost:3003/professores/apagar/${id}`)
+      .delete(url + "apagar/" + id)
       .then((response) => {
-        //console.log(response);
         callback(response)
       })
       .catch((error) => console.log(error));

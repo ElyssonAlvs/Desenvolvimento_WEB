@@ -1,70 +1,142 @@
-// Tudo novo
-import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import "../../css/crud.css";
+import AlunoService from "../../services/AlunoService"; // MongoDB e LocalStorage
+// import AlunoFirebaseService from "../../services/AlunoFirebaseService"; // Firebase
+// import FirebaseContext from "../../utils/FirebaseContext";
+
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 const EditarAluno = () => {
-    const { id } = useParams()
-    const navigate = useNavigate()
-    const [nome, setNome] = useState('')
-    const [curso, setCurso] = useState('')
-    const [ira, setIra] = useState('')
+  const [nome, setNome] = useState('');
+  const [curso, setCurso] = useState('');
+  const [ira, setIra] = useState('');
 
-    useEffect(() => {
-        const storedAlunos = JSON.parse(localStorage.getItem('alunos')) || []
-        const aluno = storedAlunos[id]
-        if (aluno) {
-            setNome(aluno.nome)
-            setCurso(aluno.curso)
-            setIra(aluno.ira)
-        }
-    }, [id])
+  const { id } = useParams(); // Pega o ID do aluno da URL
+  const navigate = useNavigate();
 
+  // Firebase
+  ///const firebase = useContext(FirebaseContext);
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        const storedAlunos = JSON.parse(localStorage.getItem('alunos')) || []
-        storedAlunos[id] = { nome, curso, ira }
-        localStorage.setItem('alunos', JSON.stringify(storedAlunos))
-        navigate('/aluno/listar')
-    }
+  useEffect(() => {
+    // Firebase
+    // AlunoFirebaseService.getById(
+    //   firebase.getFirestoreDb(),
+    //   (aluno) => {
+    //     const { nome, curso, ira } = aluno;
+    //     setNome(nome);
+    //     setCurso(curso);
+    //     setIra(ira);
+    //   },
+    //   id
+    // );
 
-    return (
-        <div>
-            <h1>Editar Aluno</h1>
-            <form classname='form-content' onSubmit={handleSubmit}>
-                <div classname='mb-3'>
-                    <label classname='form-label' htmlFor='InputNome'>Nome:</label>
-                    <input classname='form-control'
-                        type='text'
-                        name='nome'
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label' htmlFor='InputCurso'>Curso:</label>
-                    <input className='form-control'
-                        type='text'
-                        name='curso'
-                        value={curso}
-                        onChange={(e) => setCurso(e.target.value)}
-                    />
-                </div>
-                <div className='mb-3'>
-                    <label className='form-label' htmlFor='InputIra'>Ira:</label>
-                    <input className='form-control'
-                        type='text'
-                        name='ira'
-                        value={ira}
-                        onChange={(e) => setIra(e.target.value)}
-                    />
-                </div>
-                <div className='div-button-submit'>
-                    <button className='btn btn-primary' type='submit'>Salvar</button>
-                </div>
-            </form>
+    // MongoDB e LocalStorage
+
+    AlunoService.getAlunoById(
+      id,
+      (aluno) => {
+        const { nome, curso, ira } = aluno;
+        setNome(nome);
+        setCurso(curso);
+        setIra(ira);
+      }
+    );
+
+  },
+    //firebase
+    [id]
+  );
+
+  const handleInputNome = (event) => {
+    setNome(event.target.value);
+  };
+
+  const handleInputCurso = (event) => {
+    setCurso(event.target.value);
+  };
+
+  const handleInputIra = (event) => {
+    setIra(parseFloat(event.target.value)); // Converte o valor de string para número
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const alunoEditado = { nome, curso, ira };
+
+    // Firebase
+    // AlunoFirebaseService.atualizarAluno(
+    //   firebase.getFirestoreDb(),
+    //   (aluno) => {
+    //     console.log(aluno);
+    //   },
+    //   id,
+    //   alunoEditado
+    // );
+
+    // MongoDB
+
+    AlunoService.atualizarAlunoById(
+      id,
+      alunoEditado,
+      (response) => {
+        navigate("/aluno/listar")
+      }
+    );
+  };
+
+  return (
+    <div className="page-content">
+      <h1>Editar Aluno</h1>
+      <form className="form-content" onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="inputNome">Nome</label>
+          <input
+            className="form-control"
+            type="text"
+            name="nome"
+            id="inputNome"
+            onChange={handleInputNome}
+            value={nome}
+          />
         </div>
-    )
-}
 
-export default EditarAluno
+        <div className="mb-3">
+          <label className="form-label" htmlFor="inputCurso">Curso</label>
+          <input
+            className="form-control"
+            type="text"
+            name="curso"
+            id="inputCurso"
+            onChange={handleInputCurso}
+            value={curso}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label" htmlFor="inputIra">IRA</label>
+          <input
+            className="form-control"
+            type="number"
+            name="ira"
+            id="inputIra"
+            step="0.01"
+            onChange={handleInputIra}
+            value={ira}
+          />
+        </div>
+
+        <div className="div-button-submit">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ marginLeft: 0 }}
+          >
+            Atualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default EditarAluno;
