@@ -16,7 +16,8 @@ const ListarProfessor = () => {
     () => {
       // MongoDB e LocalStorage
       ProfessorService.getProfessoresFetchAsyncAwait((data) => {
-        setProfessores(data);
+        console.log(data.professores);
+        setProfessores(data.professores);
       });
 
       // Firebase

@@ -16,7 +16,8 @@ const ListarAluno = () => {
 
         // MongoDB e LocalStorage
         AlunoService.getAlunosFetchAsyncAwait((json) => {
-            setAlunos(json);
+            console.log(json.alunos);
+            setAlunos(json.alunos);
         });
 
         // Firebase
