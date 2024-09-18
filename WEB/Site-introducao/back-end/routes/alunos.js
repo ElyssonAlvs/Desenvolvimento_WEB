@@ -12,8 +12,9 @@ const AlunoService = require("../services/AlunoService");
 // LOCAL STORAGE
 router.get(
     "/listar",
-    (request,response,next) => {
-        response.json(AlunoService.listar())
+    (request, response, next) => {
+            response.json(AlunoService.listar()
+        )
     }
 )
 
@@ -22,13 +23,13 @@ router.get(
     (request, response, next) => {
         const id = request.params.id
         const aluno = AlunoService.recuperar(id)
-        response.json(Aluno)
+        response.json(aluno)
     }
 )
 
 router.post(
     "/criar",
-    (request,response,next) => {
+    (request, response, next) => {
         const novoAluno = AlunoService.criar(request.body)
         response.json(novoAluno)
     }
@@ -36,21 +37,21 @@ router.post(
 
 router.put(
     "/atualizar/:id",
-    (request,response,next) => {
-        const alunoAtualizado = 
-        AlunoService.atualizar(
-            request.params.id,
-            request.body
-        )
-        response.json(AlunoAtualizado)
+    (request, response, next) => {
+        const alunoAtualizado =
+            AlunoService.atualizar(
+                request.params.id,
+                request.body
+            )
+        response.json(alunoAtualizado)
     }
 )
 
 router.delete(
     "/apagar/:id",
-    (request,response,next) => {
+    (request, response, next) => {
         const res = AlunoService.apagar(request.params.id)
-        response.json({"res":res})
+        response.json({ "res": res })
     }
 )
 

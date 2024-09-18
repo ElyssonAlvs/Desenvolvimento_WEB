@@ -5,8 +5,9 @@ const url = "http://localhost:3003/alunos/";
 class AlunoService {
 
     // AxiosThenCatch para o MongoDB (Mongoose) e LocalStorage
-    static postAlunoAxiosThenCatch = (novoAluno) => {
-        axios.post(url + "criar", novoAluno)
+    static postAlunoAxiosThenCatch = (aluno, callback) => {
+        axios
+        .post(url + "criar", aluno)
             .then((response) => {
                 console.log(response.data)
             })
@@ -14,6 +15,19 @@ class AlunoService {
                 console.log(error)
             })
     }
+
+    static postAlunoFetchThenCatch = (aluno, callback) => {
+        fetch(url+"criar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(aluno),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => callback(json))
+          .catch((error) => console.log(error));
+      };
 
     // GET
     static getAlunosFetchAsyncAwait = async (callback) => {
@@ -57,7 +71,7 @@ class AlunoService {
 
     static getAlunoById = (id, callback) => {
         axios
-            .get(url + "recuperar/" + id)
+            .get(`http://localhost:3003/alunos/recuperar/${id}`)
             .then((response) => {
                 callback(response.data);
             })
@@ -65,9 +79,9 @@ class AlunoService {
     };
 
     // PUT
-    static atualizarAlunoById = (id, alunoEditado, callback) => {
+    static updateAluno = (id, alunoEditado, callback) => {
         axios
-            .put(url + "atualizar/" + id, alunoEditado)
+            .put(`http://localhost:3003/alunos/atualizar/${id}`)
             .then((response) => {
                 callback(response);
             })
@@ -77,9 +91,11 @@ class AlunoService {
     // DELETE
     static deleteAlunoById = (id, callback) => {
         axios
-            .delete(url + "apagar/" + id)
+            .delete(`http://localhost:3003/alunos/apagar/${id}`)
             .then((response) => {
+                alert("Aluno apagado!");
                 callback(response);
+                callback("ok!");
             })
             .catch((error) => console.log(error));
     };

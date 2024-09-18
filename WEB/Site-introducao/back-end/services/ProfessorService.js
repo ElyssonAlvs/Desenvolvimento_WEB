@@ -2,7 +2,7 @@ const ProfessorModel = require("../models/ProfessorModel")
 const professores = require("../data/data")
 
 //controle de ids
-let id = 4
+let id = professores.length
 
 class ProfessorService {
 

@@ -75,7 +75,7 @@ const EditarAluno = () => {
 
     // MongoDB
 
-    AlunoService.atualizarAlunoById(
+    AlunoService.updateAluno(
       id,
       alunoEditado,
       (response) => {

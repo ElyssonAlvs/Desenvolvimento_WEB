@@ -48,8 +48,6 @@ const EditarProfessor = () => {
                     setTitulacao(titulacao)
                     setAi(ai)
                     setUniversidade(universidade)
-
-                    console.log(professor)
                 }
             )
         }
@@ -103,7 +101,7 @@ const EditarProfessor = () => {
         // )
 
         // Para o MongoDB (Mongoose)
-        ProfessorService.atualizarProfessorById(
+        ProfessorService.updateProfessor(
             id,
             professorEditado,
             (response) => {
