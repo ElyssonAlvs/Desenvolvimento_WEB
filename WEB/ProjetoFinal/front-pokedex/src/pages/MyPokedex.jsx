@@ -4,6 +4,7 @@ const MyPokedex = () => {
     return (
         <>
             <Header />
+            <h1 style={{color:"red"}}>My Pokedex</h1>
         </>
     );
 }
