@@ -4,8 +4,9 @@ const NavLinks = () => {
     return (
         <N.Nav>
             <N.Link href="/">Home</N.Link>
-            <N.Link href="/pokedex">Pokedex</N.Link>
-            <N.Link href="/about">About</N.Link>
+            <N.Link href="/pokedex">Pokemons</N.Link>
+            <N.Link href="/about">Gerações</N.Link>
+            <N.Link href="/about">Minha Pokedex</N.Link>
         </N.Nav>
     );
 }
