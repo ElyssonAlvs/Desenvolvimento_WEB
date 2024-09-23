@@ -12,7 +12,7 @@ export const conteudo = styled.div`
 `;
 
 export const Card = styled.h1`
-    font-size: 40px;
+    font-size: 35px;
     line-height: 1.5;
     width: 450px;
     height: 0px;
@@ -20,3 +20,4 @@ export const Card = styled.h1`
     padding-left: 50px;
     font-weight: bolder;
 `;
+
