@@ -1,10 +1,10 @@
 import "../../css/crud.css";
-import AlunoService from "../../services/AlunoService"; // MongoDB e LocalStorage
-// import AlunoFirebaseService from "../../services/AlunoFirebaseService"; // Firebase
-// import FirebaseContext from "../../utils/FirebaseContext";
+//import AlunoService from "../../services/AlunoService"; // MongoDB e LocalStorage
+import AlunoFirebaseService from "../../services/AlunoFirebaseService"; // Firebase
+import FirebaseContext from "../../utils/FirebaseContext";
 
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 
 const EditarAluno = () => {
   const [nome, setNome] = useState('');
@@ -12,39 +12,38 @@ const EditarAluno = () => {
   const [ira, setIra] = useState('');
 
   const { id } = useParams(); // Pega o ID do aluno da URL
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   // Firebase
-  ///const firebase = useContext(FirebaseContext);
+  const firebase = useContext(FirebaseContext);
 
   useEffect(() => {
     // Firebase
-    // AlunoFirebaseService.getById(
-    //   firebase.getFirestoreDb(),
-    //   (aluno) => {
-    //     const { nome, curso, ira } = aluno;
-    //     setNome(nome);
-    //     setCurso(curso);
-    //     setIra(ira);
-    //   },
-    //   id
-    // );
-
-    // MongoDB e LocalStorage
-
-    AlunoService.getAlunoById(
-      id,
+    AlunoFirebaseService.getById(
+      firebase.getFirestoreDb(),
       (aluno) => {
         const { nome, curso, ira } = aluno;
         setNome(nome);
         setCurso(curso);
         setIra(ira);
-      }
+      },
+      id
     );
+
+    // MongoDB e LocalStorage
+    // AlunoService.getAlunoById(
+    //   id,
+    //   (aluno) => {
+    //     const { nome, curso, ira } = aluno;
+    //     setNome(nome);
+    //     setCurso(curso);
+    //     setIra(ira);
+    //   }
+    // );
 
   },
     //firebase
-    [id]
+    [firebase, id]
   );
 
   const handleInputNome = (event) => {
@@ -64,24 +63,23 @@ const EditarAluno = () => {
     const alunoEditado = { nome, curso, ira };
 
     // Firebase
-    // AlunoFirebaseService.atualizarAluno(
-    //   firebase.getFirestoreDb(),
-    //   (aluno) => {
-    //     console.log(aluno);
-    //   },
-    //   id,
-    //   alunoEditado
-    // );
-
-    // MongoDB
-
-    AlunoService.updateAluno(
+    AlunoFirebaseService.atualizarAluno(
+      firebase.getFirestoreDb(),
+      (aluno) => {
+        console.log(aluno);
+      },
       id,
-      alunoEditado,
-      (response) => {
-        navigate("/aluno/listar")
-      }
+      alunoEditado
     );
+
+    // MongoDB e LocalStorage
+    // AlunoService.updateAluno(
+    //   id,
+    //   alunoEditado,
+    //   (response) => {
+    //     navigate("/aluno/listar")
+    //   }
+    // );
   };
 
   return (

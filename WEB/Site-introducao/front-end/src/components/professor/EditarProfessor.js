@@ -1,11 +1,11 @@
-import ProfessorService from "../../services/ProfessorService"; //MongoDB e LocalStorage
+//import ProfessorService from "../../services/ProfessorService"; //MongoDB e LocalStorage
 import "../../css/crud.css"
-// import ProfessorFirebaseService from "../../services/ProfessorFirebaseService"
-// import FirebaseContext from "../../utils/FirebaseContext"
+import ProfessorFirebaseService from "../../services/ProfessorFirebaseService"
+import FirebaseContext from "../../utils/FirebaseContext"
 
 
-import { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useEffect, useState, useContext } from "react"
+import { useParams } from "react-router-dom"
 
 
 const EditarProfessor = () => {
@@ -17,30 +17,16 @@ const EditarProfessor = () => {
     const [universidade, setUniversidade] = useState({ ufc: false, ifce: false })
 
     const { id } = useParams() // {id:1}
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
-    //const firebase = useContext(FirebaseContext)
+    const firebase = useContext(FirebaseContext)
 
     useEffect(
         () => {
 
             // Firebase
-            // ProfessorFirebaseService.getById(
-            //     firebase.getFirestoreDb(),
-            //     (professor) => {
-            //         const { nome, curso, titulacao, ai, universidade } = professor;
-            //         setNome(nome)
-            //         setCurso(curso)
-            //         setTitulacao(titulacao)
-            //         setAi(ai)
-            //         setUniversidade(universidade)
-            //     },
-            //     id
-            // )
-
-            // Para o MongoDB (Mongoose) e LocalStorage
-            ProfessorService.getProfessorById(
-                id,
+            ProfessorFirebaseService.getById(
+                firebase.getFirestoreDb(),
                 (professor) => {
                     const { nome, curso, titulacao, ai, universidade } = professor;
                     setNome(nome)
@@ -48,12 +34,26 @@ const EditarProfessor = () => {
                     setTitulacao(titulacao)
                     setAi(ai)
                     setUniversidade(universidade)
-                }
+                },
+                id
             )
+
+            // Para o MongoDB (Mongoose) e LocalStorage
+            // ProfessorService.getProfessorById(
+            //     id,
+            //     (professor) => {
+            //         const { nome, curso, titulacao, ai, universidade } = professor;
+            //         setNome(nome)
+            //         setCurso(curso)
+            //         setTitulacao(titulacao)
+            //         setAi(ai)
+            //         setUniversidade(universidade)
+            //     }
+            // )
         }
         ,
         // firebase
-        [id]
+        [id, firebase]
     )
 
     const handleRadio = (event) => {
@@ -91,23 +91,23 @@ const EditarProfessor = () => {
         const professorEditado = { nome, curso, titulacao, ai, universidade }
 
         // Firebase
-        // ProfessorFirebaseService.atualizarProfessor(
-        //     firebase.getFirestoreDb(),
-        //     (professor) => {
-        //         console.log(professor)
-        //     },
-        //     id,
-        //     professorEditado
-        // )
+        ProfessorFirebaseService.atualizarProfessor(
+            firebase.getFirestoreDb(),
+            (professor) => {
+                console.log(professor)
+            },
+            id,
+            professorEditado
+        )
 
         // Para o MongoDB (Mongoose)
-        ProfessorService.updateProfessor(
-            id,
-            professorEditado,
-            (response) => {
-                navigate("/professor/listar")
-            }
-        )
+        // ProfessorService.updateProfessor(
+        //     id,
+        //     professorEditado,
+        //     (response) => {
+        //         navigate("/professor/listar")
+        //     }
+        // )
     }
 
     return (
@@ -254,7 +254,7 @@ const EditarProfessor = () => {
                         className="btn btn-primary"
                         style={{ marginLeft: 0 }}
                     >
-                        Atualizar
+                        ATUALIZAR
                     </button>
                 </div>
 

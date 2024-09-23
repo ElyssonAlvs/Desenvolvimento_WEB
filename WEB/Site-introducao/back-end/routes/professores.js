@@ -12,7 +12,7 @@ const ProfessorService = require("../services/ProfessorService"); // LocalStorag
 // LOCAL STORAGE
 router.get(
     "/listar",
-    (request,response,next) => {
+    (request, response, next) => {
         response.json(ProfessorService.listar())
     }
 )
@@ -28,17 +28,17 @@ router.get(
 
 router.post(
     "/criar",
-    (request,response,next) => {
+    (request, response, next) => {
         const novoProfessor = ProfessorService.criar(request.body)
-        response.json(novoProfessor)
+        response.status(201).json(novoProfessor)
     }
 )
 
 router.put(
-    "/atualizar/:id",
-    (request,response,next) => {
-        const professorAtualizado = 
-            ProfessorService.atualizar(
+    "/editar/:id",
+    (request, response, next) => {
+        const professorAtualizado =
+            ProfessorService.editar(
                 request.params.id,
                 request.body
             )
@@ -48,9 +48,9 @@ router.put(
 
 router.delete(
     "/apagar/:id",
-    (request,response,next) => {
+    (request, response, next) => {
         const res = ProfessorService.apagar(request.params.id)
-        response.json({"res":res})
+        response.json({ "res": res })
     }
 )
 

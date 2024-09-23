@@ -1,65 +1,64 @@
 import { Link } from "react-router-dom";
 import "../../css/crud.css";
-import ProfessorService from "../../services/ProfessorService"; // MongoDB e LocalStorage
-import { useState, useEffect } from "react";
-// import ProfessorFirebaseService from "../../services/ProfessorFirebaseService";
-// import FirebaseContext from "../../utils/FirebaseContext";
+//import ProfessorService from "../../services/ProfessorService"; // MongoDB e LocalStorage
+import { useState, useEffect, useContext } from "react";
+import ProfessorFirebaseService from "../../services/ProfessorFirebaseService";
+import FirebaseContext from "../../utils/FirebaseContext";
 
 // Quando utilizar o Mongo o id terá que ter
 // um "_id" e não "id" como está no código para o Firebase.
 
 const ListarProfessor = () => {
   const [professores, setProfessores] = useState([]);
-  //const firebase = useContext(FirebaseContext) // firebase
+  const firebase = useContext(FirebaseContext) // firebase
 
   useEffect(
     () => {
       // MongoDB e LocalStorage
-      ProfessorService.getProfessoresFetchAsyncAwait((data) => {
-        console.log(data.professores);
-        setProfessores(data.professores);
-      });
+      // ProfessorService.getProfessoresFetchAsyncAwait((data) => {
+      //   console.log(data.professores);
+      //   setProfessores(data.professores);
+      // });
 
       // Firebase
-      // ProfessorFirebaseService.listarProfessor(
-      //   firebase.getFirestoreDb(),
-      //   (professores) => {
-      //     // console.log(professores)
-      //     setProfessores(professores)
-      //   }
-      // )
+      ProfessorFirebaseService.listarProfessor(
+        firebase.getFirestoreDb(),
+        (professores) => {
+          setProfessores(professores)
+        }
+      )
     },
     // firebase
-    []
+    [firebase]
   );
 
   const handleDelete = (id) => {
     if (window.confirm(`Deseja realmente excluir id = ${id} ?`)) {
       // Firebase
-      // ProfessorFirebaseService.apagarProfessor(
-      //   firebase.getFirestoreDb(),
-      //   () => {
-      //     const result = professores.filter(
-      //       (professor) => professor.id !== id
-      //     )
-      //     setProfessores(result)
-      //   },
-      //   id
-      // )
+      ProfessorFirebaseService.apagarProfessor(
+        firebase.getFirestoreDb(),
+        () => {
+          const result = professores.filter(
+            (professor) => professor.id !== id
+          )
+          setProfessores(result)
+        },
+        id
+      )
 
       // MongoDD e LocalStorage
-      ProfessorService.deleteProfessorbyId(id, (response) => {
-        alert(response);
-        const result = professores.filter((professor) => professor.id !== id);
-        setProfessores(result);
-      });
+      // ProfessorService.deleteProfessorbyId(id, (response) => {
+      //   alert(response);
+      //   const result = professores.filter((professor) => professor.id !== id);
+      //   setProfessores(result);
+      // });
     }
   };
 
   const renderizarProfessores = () => {
-  if (!Array.isArray(professores)) {
-    return <tr><td colSpan="5">Não foi redenrizado um array</td></tr>;
-  }
+    if (!Array.isArray(professores)) {
+      return <tr><td colSpan="5">Não foi redenrizado um array</td></tr>;
+    }
     const vetorResultado = professores.map((professor) => {
       return (
         <>

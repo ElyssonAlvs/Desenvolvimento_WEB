@@ -1,8 +1,8 @@
 import "../../css/crud.css";
-import { useState } from "react";
-import ProfessorService from "../../services/ProfessorService"; // Mongo e LocalStorage
-//import ProfessorFirebaseService from "../../services/ProfessorFirebaseService";
-//import FirebaseContext from "../../utils/FirebaseContext";
+import { useState, useContext } from "react";
+//import ProfessorService from "../../services/ProfessorService"; // Mongo e LocalStorage
+import ProfessorFirebaseService from "../../services/ProfessorFirebaseService";
+import FirebaseContext from "../../utils/FirebaseContext";
 
 const CriarProfessor = () => {
   const [nome, setNome] = useState("");
@@ -11,7 +11,7 @@ const CriarProfessor = () => {
   const [ai, setAi] = useState({ es: false, lc: false, mc: false, al: false });
   const [universidade, setUniversidade] = useState({ ifce: false, ufc: false });
 
-  //const firebase = useContext(FirebaseContext) // Firebase
+  const firebase = useContext(FirebaseContext) // Firebase
 
   const handleRadio = (event) => {
     const reset = { ifce: false, ufc: false };
@@ -20,6 +20,18 @@ const CriarProfessor = () => {
       [event.target.value]: event.target.checked,
     });
   };
+
+  const handleInputNome = (event) => {
+    setNome(event.target.value)
+  }
+
+  const handleInputCurso = (event) => {
+    setCurso(event.target.value)
+  }
+
+  const handleSelect = (event) => {
+    setTitulacao(event.target.value)
+  }
 
   const handleCheckbox = (event) => {
     setAi({
@@ -32,23 +44,23 @@ const CriarProfessor = () => {
     event.preventDefault();
     // AxiosThenCatch para o MongoDB (Mongoose) e LocalStorage
     const novoProfessor = { nome, curso, titulacao, ai, universidade };
-    ProfessorService.postProfessorAxiosThenCatch(novoProfessor, (data) => {
-      console.log(data);
-    });
+    // ProfessorService.postProfessorAxiosThenCatch(novoProfessor, (data) => {
+    //   console.log(data);
+    // });
 
     // Persistindo no Firebase
-    // ProfessorFirebaseService.criarProfessor(
-    //     firebase.getFirestoreDb(),
-    //     (professorSimples) => console.log(professorSimples),
-    //     novoProfessor
-    // )
+    ProfessorFirebaseService.criarProfessor(
+        firebase.getFirestoreDb(),
+        (professorSimples) => console.log(professorSimples),
+        novoProfessor
+    )
   };
 
   return (
     <>
       <div className="page-content">
         <h1>Criar Professor</h1>
-        <form onSubmit={handleSubmit}>
+        <form className="form-content" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="idNome" className="form-label">
               Nome
@@ -59,7 +71,7 @@ const CriarProfessor = () => {
               type="text"
               name="nome"
               value={nome}
-              onChange={(event) => setNome(event.target.value)}
+              onChange={handleInputNome}
               className="form-control"
             />
           </div>
@@ -74,7 +86,7 @@ const CriarProfessor = () => {
               type="text"
               name="curso"
               value={curso}
-              onChange={(event) => setCurso(event.target.value)}
+              onChange={handleInputCurso}
               className="form-control"
             />
           </div>
@@ -87,7 +99,7 @@ const CriarProfessor = () => {
             <select
               id="idTitulacao"
               value={titulacao}
-              onChange={(event) => setTitulacao(event.target.value)}
+              onChange={handleSelect}
               className="form-select"
             >
               <option value="GRAD">GRADUAÇÃO</option>
@@ -189,7 +201,7 @@ const CriarProfessor = () => {
           </div>
 
           <div className="div-button-submit">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" style={{ marginLeft: 0 }}>
               SUBMETER
             </button>
           </div>

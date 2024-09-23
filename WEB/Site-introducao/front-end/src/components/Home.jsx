@@ -74,6 +74,16 @@ const Home = () => {
                                             Editar Aluno
                                         </Link>
                                     </li>
+                                    <li>
+                                        <Link className="dropdown-item" to="alunos/por-curso">
+                                            Alunos por Curso
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="dropdown-item" to="alunos/destacados">
+                                            Alunos Destacados
+                                        </Link>
+                                    </li>
                                 </ul>
                             </li>
                             {/* FIM DO DROPDOWN */}

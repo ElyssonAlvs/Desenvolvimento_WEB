@@ -2,7 +2,7 @@ const AlunoModel = require("../models/AlunoModel")
 const alunos = require("../data/data")
 
 //controle de ids
-let id = alunos.length
+let id = 4
 
 class AlunoService {
 

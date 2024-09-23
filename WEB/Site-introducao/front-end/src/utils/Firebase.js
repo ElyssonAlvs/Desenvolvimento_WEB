@@ -13,7 +13,7 @@ class Firebase {
         return getFirestore(this.app)
     }
     // Autenticação
-    getAuthentication(){
+    getAuthentication() {
         return this.getAuthentication(this.app)
     }
 }

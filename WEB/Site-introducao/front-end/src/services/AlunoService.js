@@ -81,7 +81,7 @@ class AlunoService {
     // PUT
     static updateAluno = (id, alunoEditado, callback) => {
         axios
-            .put(`http://localhost:3003/alunos/atualizar/${id}`)
+            .put(`http://localhost:3003/alunos/atualizar/${id}`, alunoEditado)
             .then((response) => {
                 callback(response);
             })
@@ -94,7 +94,7 @@ class AlunoService {
             .delete(`http://localhost:3003/alunos/apagar/${id}`)
             .then((response) => {
                 alert("Aluno apagado!");
-                callback(response);
+                console.log(response);
                 callback("ok!");
             })
             .catch((error) => console.log(error));

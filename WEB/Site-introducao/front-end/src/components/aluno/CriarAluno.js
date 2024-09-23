@@ -1,8 +1,8 @@
 import "../../css/crud.css";
-import React, { useState } from "react";
-import AlunoService from "../../services/AlunoService";
-// import AlunoFirebaseService from "../../services/AlunoFirebaseService";
-// import FirebaseContext from "../../utils/FirebaseContext";
+import React, { useState, useContext } from "react";
+//import AlunoService from "../../services/AlunoService";
+import AlunoFirebaseService from "../../services/AlunoFirebaseService";
+import FirebaseContext from "../../utils/FirebaseContext";
 
 const CriarAluno = () => {
     const [nome, setNome] = useState("");
@@ -10,21 +10,21 @@ const CriarAluno = () => {
     const [ira, setIra] = useState("");
 
     // Firebase
-    //const firebase = useContext(FirebaseContext);
+    const firebase = useContext(FirebaseContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const novoAluno = { nome, curso, ira };
-        AlunoService.postAlunoAxiosThenCatch(novoAluno, (data) => {
-            console.log(data);
-        });
+        // AlunoService.postAlunoAxiosThenCatch(novoAluno, (data) => {
+        //     console.log(data);
+        // });
 
         // Persistindo no Firebase
-        // AlunoFirebaseService.criarAluno(
-        //     firebase.getFirestoreDb(),
-        //     novoAluno,
-        //     (alunoSimples) => console.log(alunoSimples),
-        // );
+        AlunoFirebaseService.criarAluno(
+            firebase.getFirestoreDb(),
+            novoAluno,
+            (alunoSimples) => console.log(alunoSimples),
+        );
     };
 
     return (
@@ -69,7 +69,7 @@ const CriarAluno = () => {
                 </div>
                 <div className="div-button-submit">
                     <button className="btn btn-primary" type="submit">
-                        SUBMETER
+                        Submeter
                     </button>
                 </div>
             </form>

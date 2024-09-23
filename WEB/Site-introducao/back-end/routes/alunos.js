@@ -13,7 +13,7 @@ const AlunoService = require("../services/AlunoService");
 router.get(
     "/listar",
     (request, response, next) => {
-            response.json(AlunoService.listar()
+        response.json(AlunoService.listar()
         )
     }
 )

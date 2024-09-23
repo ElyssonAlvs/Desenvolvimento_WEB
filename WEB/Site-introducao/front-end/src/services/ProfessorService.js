@@ -6,7 +6,7 @@ class ProfessorService {
   // AxiosThenCatch para o MongoDB (Mongoose) e LocalStorage
   static postProfessorAxiosThenCatch = (professor, callback) => {
     axios
-      .post(url+"criar", professor)
+      .post(url + "criar", professor)
       .then((response) => {
         callback(response);
       })
@@ -24,9 +24,9 @@ class ProfessorService {
       console.log(error);
     }
   };
-  
+
   static postProfessorFetchThenCatch = (professor, callback) => {
-    fetch(url+"criar", {
+    fetch(url + "criar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(professor),
@@ -37,7 +37,7 @@ class ProfessorService {
       .then((json) => callback(json))
       .catch((error) => console.log(error));
   };
-  
+
   static getProfessoresAxiosAsyncAwait = async (callback) => {
     try {
       const response = await axios.get(url + "listar");
@@ -46,18 +46,18 @@ class ProfessorService {
       console.log(error);
     }
   };
-  
+
   static getProfessoresAxiosThenCatch = (callback) => {
     axios
-    .get(url + "listar")
-    .then((response) => {
-      callback(response.data);
-    })
-    .catch((error) => console.log(error));
+      .get(url + "listar")
+      .then((response) => {
+        callback(response.data);
+      })
+      .catch((error) => console.log(error));
   };
-  
+
   static getProfessorById = (id, callback) => {
-    axios  
+    axios
       .get(`http://localhost:3003/professores/recuperar/${id}`)
       .then((response) => {
         callback(response.data);
@@ -65,7 +65,7 @@ class ProfessorService {
       .catch((error) => console.log(error));
   };
 
-  
+
   // PUT
   static updateProfessor = (id, professorEditado, callback) => {
     axios
@@ -77,7 +77,7 @@ class ProfessorService {
   };
 
   // DELETE
-static deleteProfessorbyId = (id, callback) => {
+  static deleteProfessorbyId = (id, callback) => {
     axios
       .delete(`http://localhost:3003/professores/apagar/${id}`)
       .then(response => {
@@ -85,8 +85,8 @@ static deleteProfessorbyId = (id, callback) => {
         console.log(response)
         callback("ok!")
       })
-      .catch( error => console.log(error))
-  }  
+      .catch(error => console.log(error))
+  }
 }
 
 export default ProfessorService;
