@@ -1,41 +1,12 @@
-// import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import Home from "./pages/Home";
-import Pokemons from "./pages/Pokemon";
-
-
-
-// const router = createBrowserRouter([
-//   {
-//       path: "/",
-//       element: <Home />,
-//       children: [
-//           {
-//             path: "/pokemons",
-//             element: <Pokemons />,
-//           },
-//           {
-//             path: "/mypokedex",
-//             element: <MyPokedex />
-//           },
-//           {
-//             path: "/generations",
-//             element: <Generations />,
-//           }
-//       ]
-//   }
-// ]);
-
+import { RouterProvider } from "react-router-dom";
+import router from "./router.js";
 
 function App() {
   return (
-    <>
-      <Home />
-      <Pokemons />
-    </>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
 export default App;
-
-
