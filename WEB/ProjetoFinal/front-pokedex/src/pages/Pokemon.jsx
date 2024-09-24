@@ -270,10 +270,27 @@ const Pokemon = () => {
                         </div>
                     </div>
                 </div>
-                <div className="container">
+                <div
+                    className="container"
+                    style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "flex-start", // Alinha os cards à esquerda
+                        padding: "10px", // Adiciona um pouco de espaço interno
+                    }}
+                >
                     <div className="row">
                         {filteredPokemons.map((pokemon, index) => (
-                            <div className="col mb-3" key={index}>
+                            <div
+                                className="col mb-3"
+                                style={{
+                                    margin: "10px",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center", // Centraliza os cards
+                                }}
+                                key={index}>
+
                                 <PokemonCard
                                     id={pokemon.id}
                                     name={pokemon.name}
