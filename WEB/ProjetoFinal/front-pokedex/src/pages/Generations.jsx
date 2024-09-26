@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../css/App.css";
 import { Link } from "react-router-dom";
 import pokemonImage from "../assets/International_Pokémon_logo.svg.png";
-import PokemonMinCard from "../components/PokemonCard";
+import PokemonMinCard from "../Card/PokemonMinCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -19,7 +19,7 @@ const Generations = () => {
   const getPokemons = () => {
     const endpoints = [];
 
-    for (let i = 1; i < 900; i++) {
+    for (let i = 1; i < 10; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
     }
 
