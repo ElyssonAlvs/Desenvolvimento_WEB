@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var pokemonRouter = require('./routes/pokemon');
 var pokedexRouter = require('./routes/pokedex');
 
@@ -28,6 +27,5 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/api/pokemon', pokemonRouter);
 app.use('/api/pokedex', pokedexRouter); // Certifique-se de que o pokedexRouter esteja importado
-app.use('/users', usersRouter);
 
 module.exports = app;
