@@ -1,5 +1,6 @@
 const axios = require('axios');
-const Pokemon = require('../models/Pokemon');
+const Pokemon = require('../models/PokemonModelMongo');
+
 
 const POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/';
 

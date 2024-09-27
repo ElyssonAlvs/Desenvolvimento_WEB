@@ -1,12 +1,19 @@
-const { Pokedex, Pokemon } = require('../models/PokedexModelMongo');
-const PokeApiService = require('./PokeApiService');
+const Pokedex = require('../models/PokedexModelMongo.js'); // Importa apenas Pokedex
+const Pokemon = require('../models/PokemonModelMongo.js'); // Importa Pokemon, se houver um arquivo separado para o modelo Pokemon
+
+const PokeApiService = require('../services/PokeApiService.js');
 const mongoose = require('mongoose');
+
 
 class PokedexService {
 
     // Retorna todas as Pokédex
     async getAllPokedex() {
-        return await Pokedex.find().populate('pokemons');
+        try {
+            return await Pokedex.find().populate('pokemons');
+        } catch (error) {
+            throw new Error('Erro ao buscar todas as Pokedex: ' + error.message);
+        }
     }
 
     // Retorna uma Pokédex por ID
