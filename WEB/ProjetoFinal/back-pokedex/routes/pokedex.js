@@ -1,4 +1,3 @@
-// controllers/pokedexController.js
 const express = require('express');
 const router = express.Router();
 const pokedexService = require('../services/PokedexServiceMongo');
@@ -29,8 +28,12 @@ router.get('/:pokedexId/pokemon/name/:name', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const pokedex = await pokedexService.createPokedex(req.body);
-    res.status(201).json(pokedex);
+    try {
+        const pokedex = await pokedexService.createPokedex(req.body);
+        res.status(201).json(pokedex);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
 router.put('/:id', async (req, res) => {

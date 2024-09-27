@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const pokemonService = require('../services/PokemonServiceMongo'); // Importando o serviço
+const pokemonService = require('../services/PokemonServiceMongo');
 
 // GET - Retorna um Pokémon por nome
 router.get('/name/:name', async (req, res) => {
   const { name } = req.params;
   try {
-    const pokemon = await pokemonService.getPokemonByName(name); // Mudança aqui para chamar o método do serviço
+    const pokemon = await pokemonService.getPokemonByName(name);
     if (!pokemon) {
       return res.status(404).json({ message: 'Pokémon não encontrado' });
     }
