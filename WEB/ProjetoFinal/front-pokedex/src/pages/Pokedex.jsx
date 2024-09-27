@@ -11,7 +11,7 @@ const Pokedex = () => {
 
   // Efeito para buscar as Pokédexes do backend
   useEffect(() => {
-    fetch("http://localhost:8080/api/pokedex") // Atualizando a rota aqui
+    fetch("http://localhost:3003/api/pokedex") // Atualizando a rota aqui
       .then((response) => response.json())
       .then((data) => setPokedexes(data))
       .catch((error) => console.error("Erro ao buscar Pokédexes:", error));
@@ -20,7 +20,7 @@ const Pokedex = () => {
   // Função para adicionar uma nova Pokédex
   const handleCreatePokedex = () => {
     if (newPokedexName.trim()) {
-      fetch("http://localhost:8080/api/pokedex", {
+      fetch("http://localhost:3003/api/pokedex", {
         // Atualizando a rota aqui
         method: "POST",
         headers: {
@@ -67,7 +67,7 @@ const Pokedex = () => {
             marginRight: "40px",
           }}
         >
-          <a aria-current="page" href="http://localhost:3000">
+          <a aria-current="page" href="http://localhost:3003">
             <img src={pokemonImage} alt="Pokémon" width="112" height="41" />
           </a>
           <button

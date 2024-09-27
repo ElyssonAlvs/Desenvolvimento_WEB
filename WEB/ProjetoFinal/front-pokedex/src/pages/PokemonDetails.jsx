@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom"; // Adicione useNavigate
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Header from "../components/Header";
 
 const PokedexDetail = () => {
@@ -14,10 +14,10 @@ const PokedexDetail = () => {
   const [loading, setLoading] = useState(true); // Estado de loading enquanto carrega os Pokémons
 
   // Função para buscar os Pokémons da Pokédex atual
-const fetchPokemons = async () => {
+const fetchPokemons = useCallback(async () => {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/pokedex/${id}/pokemon` // Acessa a rota para pegar os Pokémons da Pokédex
+      `http://localhost:3003/api/pokedex/${id}/pokemon` // Acessa a rota para pegar os Pokémons da Pokédex
     );
     if (!response.ok) {
       throw new Error("Erro ao buscar Pokémons da Pokédex");
@@ -30,18 +30,16 @@ const fetchPokemons = async () => {
   } finally {
     setLoading(false); // Finaliza o estado de carregamento
   }
-};
-
-
+}, [id]);
 
   useEffect(() => {
     fetchPokemons(); // Busca os Pokémons ao carregar o componente
-  }, [id]);
+  }, [fetchPokemons]);
 
   const handleUpdateName = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/pokedex/${id}/pokemon`, // Requisição por id
+        `http://localhost:3003/api/pokedex/${id}/pokemon`, // Requisição por id
         {
           method: "PUT",
           headers: {
@@ -54,9 +52,8 @@ const fetchPokemons = async () => {
       if (!response.ok) {
         throw new Error("Erro ao atualizar o nome da Pokédex");
       }
-
       alert("Nome da Pokédex atualizado com sucesso!");
-      setIsUpdating(false); // Fecha o campo de atualização
+      fetchPokemons(); // Atualiza a lista de Pokémons após a atualização do nome
     } catch (error) {
       console.error("Erro ao atualizar o nome da Pokédex:", error);
       setError(error.message); // Armazena a mensagem de erro no estado
@@ -71,7 +68,7 @@ const fetchPokemons = async () => {
     if (confirmDelete) {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/pokedex/${id}/pokemon`, // Requisição para deletar a Pokédex
+          `http://localhost:3003/api/pokedex/${id}/pokemon`, // Requisição para deletar a Pokédex
           {
             method: "DELETE",
           }

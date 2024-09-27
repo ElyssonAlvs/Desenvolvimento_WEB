@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../css/App.css";
 import { Link } from "react-router-dom";
 import pokemonImage from "../assets/International_Pokémon_logo.svg.png";
-import PokemonMinCard from "../Card/PokemonMinCard";
+import PokemonMinCard from "../components/PokemonMinCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 

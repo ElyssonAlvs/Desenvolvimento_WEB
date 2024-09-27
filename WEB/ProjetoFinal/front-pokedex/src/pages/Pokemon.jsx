@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/App.css";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import pokemonImage from "../assets/International_Pokémon_logo.svg.png";
-import PokemonCard from "../Card/PokemonCard";
+import PokemonCard from "../components/PokemonCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
@@ -56,7 +56,7 @@ const Pokemon = () => {
 
     const getPokemons = async () => {
         const endpoints = [];
-        for (let i = 1; i < 200; i++) {
+        for (let i = 1; i < 50; i++) {
             endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         }
 

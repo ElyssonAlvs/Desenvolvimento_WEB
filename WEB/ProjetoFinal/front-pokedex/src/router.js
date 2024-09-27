@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Pokemon from "./pages/Pokemon";
 import Pokedex from "./pages/Pokedex";
 import Generations from "./pages/Generations";
+import PokemonDetails from "./pages/PokemonDetails";
 
 const router = createBrowserRouter([
     {

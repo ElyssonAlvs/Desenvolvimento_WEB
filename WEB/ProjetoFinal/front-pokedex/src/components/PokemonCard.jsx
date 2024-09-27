@@ -7,21 +7,21 @@ const PokemonCard = ({ id, name, img, life, atk, shild, speed, type, type2, addT
   const [pokedexes, setPokedexes] = useState([]); // Estado para armazenar as Pokédexes
   const [error, setError] = useState(null); // Estado para armazenar erros
 
-  useEffect(() => {
-    const fetchPokedexes = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/api/pokedex");
-        if (!response.ok) {
-          throw new Error("Erro ao buscar Pokédexes");
-        }
-        const data = await response.json();
-        setPokedexes(data); // Armazena as Pokédexes no estado
-      } catch (err) {
-        setError(err.message); // Armazena a mensagem de erro no estado
-        console.error("Erro ao buscar Pokédexes:", err);
+  const fetchPokedexes = async () => {
+    try {
+      const response = await fetch("http://localhost:3003/api/pokedex");
+      if (!response.ok) {
+        throw new Error("Erro ao buscar Pokédexes");
       }
-    };
+      const data = await response.json();
+      setPokedexes(data); // Armazena as Pokédexes no estado
+    } catch (err) {
+      console.error("Erro ao buscar Pokédexes:", err);
+      setError(err.message); // Armazena a mensagem de erro no estado
+    }
+  };
 
+  useEffect(() => {
     fetchPokedexes();
   }, []); // Executa apenas uma vez quando o componente é montado
 
@@ -31,7 +31,7 @@ const PokemonCard = ({ id, name, img, life, atk, shild, speed, type, type2, addT
 
   const handleSelectPokedex = async (pokedex) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/pokedex/${pokedex.id}/pokemon/${name}`, {
+      const response = await fetch(`http://localhost:3003/api/pokedex/${pokedex.id}/pokemon/${name}`, {
         method: 'POST',
       });
       if (!response.ok) {
