@@ -1,6 +1,6 @@
 # Desenvolvimento de Software para Web - 2024.1
 
-Repositório destinado para as atividades e aprendizagem em React utilizando JavaScript como principal linguagem. Durante a cadeira, foram abordados diversos conceitos do framework **React**, sobre Banco de dados, com foco em não relacionais, no caso, MongoDB e **Linguagem de Marcação** e Script, HTML e CSS e como framework **Bootstrap**.
+Repositório destinado para as atividades e aprendizagem em React utilizando JavaScript como principal linguagem. Durante a cadeira, foram abordados diversos conceitos do framework **React**, sobre Banco de dados, com foco em não relacionais, no caso, MongoDB e **Linguagem de Marcação e Script**, HTML e CSS e como framework **Bootstrap**.
 
 ## Linguagem
 
