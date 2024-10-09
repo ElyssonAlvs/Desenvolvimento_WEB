@@ -20,8 +20,7 @@ Repositório destinado para as atividades e aprendizagem em React utilizando Jav
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
-
-Postgress - em produção
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ### Projeto Final
 
@@ -32,5 +31,5 @@ Ao final da cadeira foi proposto um Projeto Final, onde foi solicitada uma aplic
   - **Atividades:** Se concentram as atividades desenvolvidas durante a cadeira, disponíveis com uma frequeência semanal.
   - Introducao: Tem-se todos os aprendizados durante a cadeira, divididos dentro da pasta ***WEB\Introducao\src\components*** estão as práticas.
   - **Pokedex:** Estão as pastas contendo o backend (Java Spring + Postgress) e o frontend (React + BootStrap).
-  - **ProjetoFinal:** Mesmo intúito da pasta Pokedex mas mudando para Express e Postgress.
-  - **Site-introducao:** Presente o site desenvolvido durante a disciplica.
+  - **ProjetoFinal:** Mesmo intúito da pasta Pokedex mas mudando para Express e MongoDB (*Descontinuado*).
+  - **Site-introducao:** Presente o site desenvolvido durante a disciplina.
